@@ -1,126 +1,64 @@
 package interviews.preparation;
 
-// Java program to find next smallest 
-// palindrome
+import java.util.Scanner;
 
-public class code 
+//A recursive solution for subset sum problem
+class code
 {
-	// Returns next palindrome of a given 
-	// number num[]. This function is for 
-	// input type 2 and 3
-	static void generateNextPalindromeUtil(int num[], int n) 
+	// Returns true if there is a subset of set[] with sun equal to given sum
+    static boolean isSubsetSum(int set[], int n, int sum)
+    {
+        // The value of subset[i][j] will be true if there 
+            // is a subset of set[0..j-1] with sum equal to i
+        boolean subset[][] = new boolean[sum+1][n+1];
+      
+        // If sum is 0, then answer is true
+        for (int i = 0; i <= n; i++)
+          subset[0][i] = true;
+      
+        // If sum is not 0 and set is empty, then answer is false
+        for (int i = 1; i <= sum; i++)
+          subset[i][0] = false;
+      
+         // Fill the subset table in botton up manner
+         for (int i = 1; i <= sum; i++)
+         {
+           for (int j = 1; j <= n; j++)
+           {
+             subset[i][j] = subset[i][j-1];
+             if (i >= set[j-1])
+               subset[i][j] = subset[i][j] || 
+                                          subset[i - set[j-1]][j-1];
+           }
+         }
+      
+        /* // uncomment this code to print table
+         for (int i = 0; i <= sum; i++)
+         {
+           for (int j = 0; j <= n; j++)
+              System.out.println (subset[i][j]);
+         } */
+      
+         return subset[sum][n];
+         }
+	/* Driver program to test above function */
+	public static void main (String args[])
 	{
-		int mid = n / 2;
+Scanner n1 = new Scanner(System.in);
+int num = n1.nextInt();
+        
+for(int i = 1; i <= num; i++) {
+    if(i%3 == 0) {
+        System.out.print("Fizz");
+    }
+    else if(i%5 == 0) {
+        System.out.print("Buzz");
+    }
+    else {
+    	System.out.print(i);
+    }
 
-		// end of left side is always 'mid -1'
-		int i = mid - 1;
-		
-		// Begining of right side depends 
-		// if n is odd or even
-		int j = (n % 2 == 0) ? mid : mid + 1;
-		
-		// A bool variable to check if copy of left 
-		// side to right 
-		// is sufficient or not
-		boolean leftsmaller = false;
 
-		// Initially, ignore the middle same digits
-		while (i >= 0 && num[i] == num[j]) 
-		{
-			i--;
-			j++;
-		}
-		
-		// Find if the middle digit(s) need to 
-		// be incremented or not (or copying left 
-		// side is not sufficient)
-		if (i < 0 || num[i] < num[j]) 
-		{
-			leftsmaller = true;
-		}
-		
-		// Copy the mirror of left to tight
-		while (i >= 0) 
-		{
-			num[j++] = num[i--];
-		}
-		
-		// Handle the case where middle digit(s) 
-		// must be incremented. This part of code 
-		// is for CASE 1 and CASE 2.2
-		if (leftsmaller) 
-		{
-			int carry = 1;
-		
-			// If there are odd digits, then increment
-			// the middle digit and store the carry
-			if (n % 2 == 1) {
-				num[mid] += 1;
-				carry = num[mid] / 10;
-				num[mid] %= 10;
-			}
-			i = mid - 1;
-			j = (n % 2 == 0 ? mid : mid + 1);
-			
-			// Add 1 to the rightmost digit of the left 
-			// side, propagate the carry towards MSB digit 
-			// and simultaneously copying mirror of the 
-			// left side to the right side.
-			while (i >= 0) 
-			{
-				num[i] = num[i] + carry;
-				carry = num[i] / 10;
-				num[i] %= 10;
-				num[j] = num[i];// copy mirror to right
-				i--;
-				j++;
-			}
-
-		}
+} 
 	}
-
-	// The function that prints next palindrome 
-	// of a given number num[] with n digits.
-	static void generateNextPalindrome(int num[], int n) 
-	{
-		System.out.println("Next Palindrome is:");
-		
-		// Input type 1: All the digits are 9, 
-		// simply o/p 1 followed by n-1 0's 
-		// followed by 1.
-		if (isAll9(num, n)) {
-			System.out.print("1");
-			for (int i = 0; i < n - 1; i++)
-				System.out.print("0");
-			System.out.println("1");
-
-		}
-	
-		// Input type 2 and 3
-		else {
-			generateNextPalindromeUtil(num, n);
-			printarray(num);
-		}
-	}
-
-	// A utility function to check if num has all 9s
-	static boolean isAll9(int num[], int n) {
-		for (int i = 0; i < n; i++)
-			if (num[i] != 9)
-				return false;
-		return true;
-	}
-
-	/* Utility that prints out an array on a line */
-	static void printarray(int num[]) {
-		for (int i = 0; i < num.length; i++)
-			System.out.print(num[i]);
-		System.out.println();
-	}
-
-	public static void main(String[] args) 
-	{
-		int num[] = { 7,1,9,9,1,7 };
-		generateNextPalindrome(num, num.length);
-	}
-}
+}/* This code is contributed by Rajat Mishra */
