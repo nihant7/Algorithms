@@ -1,7 +1,5 @@
 package interviews.preparation;
 
-import java.util.Scanner;
-
 //A recursive solution for subset sum problem
 class code
 {
@@ -44,21 +42,12 @@ class code
 	/* Driver program to test above function */
 	public static void main (String args[])
 	{
-Scanner n1 = new Scanner(System.in);
-int num = n1.nextInt();
-        
-for(int i = 1; i <= num; i++) {
-    if(i%3 == 0) {
-        System.out.print("Fizz");
-    }
-    else if(i%5 == 0) {
-        System.out.print("Buzz");
-    }
-    else {
-    	System.out.print(i);
-    }
-
-
-} 
+		int set[] = {3, 34, 4, 12, 5, 2};
+		int sum = 9;
+		int n = set.length;
+		if (isSubsetSum(set, n, sum) == true)
+			System.out.println("Found a subset with given sum");
+		else
+			System.out.println("No subset with given sum");
 	}
 }/* This code is contributed by Rajat Mishra */

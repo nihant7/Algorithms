@@ -1,12 +1,5 @@
 package interviews.preparation;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-
-/* IMPORTANT: Multiple classes and nested static classes are supported */
 
 /*
  * uncomment this if you want to read input.
@@ -23,40 +16,45 @@ import java.util.*;
 import java.util.*;
 class TestClass {
     
-    protected static int divs(Integer m, Integer n) {
-    	
-    	Integer len = Math.min(m, n);
-    	Integer count = 0; 
-    	for(int i = 1; i <= len; i++) {
-            if(m % i == 0 && n % i == 0) ++count;
-        }
-       
-        return count;
-    }
-    
+    public static Stack<Integer> deleteFriend(int friends, int delNum, int[] arr) {
+		Stack<Integer> st = new Stack<Integer>();
+		st.push(arr[0]);
+		for(int i = 1; i < arr.length; i++) {
+			int top = st.peek();
+			if(top < arr[i]) {
+				st.pop();
+				st.push(arr[i]);
+			}
+			else{
+				st.push(arr[i]);
+			}
+			
+		}
+		return st;
+	}
+	
     public static void main(String args[] ) throws Exception {
-        /* Sample code to perform I/O:
-         * Use either of these methods for input
-
-        //BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String name = br.readLine();                // Reading input from STDIN
-        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
-
-        //Scanner
-        Scanner s = new Scanner(System.in);
-        String name = s.nextLine();                 // Reading input from STDIN
-        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
-
-        */
-
-        // Write your code here
-        //Scanner
-    	
-        Scanner s = new Scanner(System.in);
-        int n1 = s.nextInt();                 // Reading input from STDIN
-        int n2 = s.nextInt();
-        int count = divs(n1, n2);
-        System.out.println(count);
+        
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        
+    	Scanner sc1 = new Scanner(System.in);
+        int n = sc1.nextInt();
+        
+        
+        Scanner sc2 = new Scanner(System.in);
+        
+        int[] ar = new int[N];
+        for(int i = 0; i < N; i++) {
+            ar[i] = sc2.nextInt();
+        }
+        
+        Stack<Integer> retStack = deleteFriend(N, n, ar);
+        
+        Iterator itr = retStack.iterator();
+        
+        while(itr.hasNext()) {
+        	System.out.print(itr.next() + " ");
+        }
     }
 }

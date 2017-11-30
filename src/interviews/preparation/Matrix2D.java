@@ -5,17 +5,23 @@ import java.util.List;
 
 public class Matrix2D {
 	
-	public int find(int[][] matrix, int target) {
-		int m = matrix.length;
-		int n = matrix[0].length;
-		
-		int start = 0;
-		int end = m*n-1;
-		
-		while(start <= end) {
-			
-		}
-		
+	public static void add(int[][] mat) {
+		int sum = 0, cnt = 0;
+for(int i = 0; i < mat.length; i++) {
+	for(int j = 0; j < mat[0].length; j++) {
+			sum += mat[i][j];
+			cnt++;
+			if(sum == 0) {
+				break;
+			}
+	}
+	if(sum == 0) {
+		break;
+	}
+	
+	
+}
+System.out.println(cnt);
 	}
 	
 	public static int number(int[][] mat, int row , int col) {
@@ -34,17 +40,12 @@ public class Matrix2D {
 		   String a[] = new String[]{"abc","klm","xyz","pqr"};
 		   
 		   int[][] mat = new int[][] {
-			   						{1,2,3},
-			   						{4,5,6},
-			   						{7,8,9},
+			   						{1,-1,1},
+			   						{2,-2,2},
+			   						{3,-3,3},
 		   						 };
 		   						 
-		   	System.out.println("The" + Matrix2D.number(mat, 0, 2));
-		   
-		   List list1 = Arrays.asList(a);
-
-		   // printing the list
-		   System.out.println("The list is:" + list1);
+		   	add(mat);
 
 	}
 
